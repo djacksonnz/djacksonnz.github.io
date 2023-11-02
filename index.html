@@ -32,19 +32,19 @@
     <div>Loading, please wait...</div>
   </div>
     <a-scene
-        vr-mode-ui='enabled: true;'
-        renderer="logarithmicDepthBuffer: true; precision: low;"
+        vr-mode-ui='enabled: false;'
+        renderer="logarithmicDepthBuffer: false; precision: medium;"
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: true;'>
 
         <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
         <a-nft
-            type='nft' url='./trex/trex-image/trex'
-            smooth='true' smoothCount='5' smoothTolerance='0.1' smoothThreshold='2'>
+            type='nft' url='./images/ARPlatformBlue'
+            smooth='false' smoothCount='5' smoothTolerance='0.1' smoothThreshold='2'>
             <a-entity
-                gltf-model='7nyhyn.gltf'
-                scale="15 15 15"
+                gltf-model='./images/Pray.gltf'
+                scale="5 5 5"
                 rotation="0 90"
-                position="0 0 0"
+                position="100 0 0"
                 >
             </a-entity>
         </a-nft>
