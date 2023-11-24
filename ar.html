@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script
@@ -13,23 +13,22 @@
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-  <button style="position: absolute; top: 0; left: 0; width: 100px; height: 30px; z-index: 1;" id="quit">QUIT</button>
   <a-scene vr-mode-ui="enabled: false;" loading-screen="enabled: true;"
     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" id="scene" embedded gesture-detector>
 
-    <a-marker type="pattern" preset="custom" url="assets/pattern-fucking pink image.patt">
+    <a-marker type="pattern" preset="custom" url="assets/pattern-pink.patt">
       <a-image src="assets/pray.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
     </a-marker>
 
-    <a-marker type="pattern" preset="custom" url="assets/pattern-fucking green image.patt">
-      <a-image src="assets/stop.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+    <a-marker type="pattern" preset="custom" url="assets/pattern-green.patt">
+      <a-image src="assets/stop.png" scale="1 1 1" class="clickable" rotation="-90 -45 0" gesture-handler></a-image>
     </a-marker>
 
-    <a-marker type="pattern" preset="custom" url="assets/pattern-fucking blue image.patt">
+    <a-marker type="pattern" preset="custom" url="assets/pattern-blue.patt">
       <a-image src="assets/thumb.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
     </a-marker>
 
-    <a-marker type="pattern" preset="custom" url="assets/pattern-fucking yellow image.patt">
+    <a-marker type="pattern" preset="custom" url="assets/pattern-brown.patt">
       <a-image src="assets/wave.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
     </a-marker>
 
@@ -37,13 +36,5 @@
     <a-entity camera></a-entity>
   </a-scene>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-  $(document).ready(() => {
-    $('#quit').click(() => {
-      location.replace('index.html')
-    });
-  });
-</script>
 
 </html>
