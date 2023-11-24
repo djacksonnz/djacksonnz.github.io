@@ -1,63 +1,162 @@
-<!-- <!DOCTYPE html>
-<html>
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  <!-- we import arjs version without NFT but with marker + location based support -->
-  <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
-  <!-- <body style="margin : 0px; overflow: hidden;"> -->
-    <!-- <a-scene embedded arjs> -->
-      <!-- <a-marker type="pattern" url="assets/marker.patt"> -->
-        <!-- we use cors proxy to avoid cross-origin problems -->
-        <!--
-          ⚠️⚠️⚠️
-          https://arjs-cors-proxy.herokuapp.com/ is now offline, Heroku has dismissed all his free plans from November 2022.
-          You need to host your own proxy and use it instead. The proxy is based on CORS Anywhere (see https://github.com/Rob--W/cors-anywhere).
-          ⚠️⚠️⚠️
-        -->
-        <!-- <a-image src="./assets/asset.png" rotation="-90 0 0" scale="1 1 1"></a-image> -->
-      <!-- </a-marker> -->
-      <!-- <a-entity camera></a-entity> -->
-    <!-- </a-scene> -->
-  <!-- </body> -->
-<!-- </html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Keyboard</title>
+  <style>
 
-<!doctype html>
-<html>
-    <head>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-    </head>
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+.keyboard {
+display: grid;
+grid-template-columns: repeat(10, 1fr);
+grid-template-rows: repeat(3, 1fr);
+grid-column-gap: 10px;
+grid-row-gap: 10px;
+position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      padding: 10px;
+      box-sizing: border-box;
+}
 
-    <body style="margin: 0; overflow: hidden;">
-        <a-scene
-            vr-mode-ui="enabled: false;"
-            loading-screen="enabled: true;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true;"
-            id="scene"
-            embedded
-            gesture-detector
-        >
-            <a-marker
-                id="animated-marker"
-                type="pattern"
-                preset="custom"
-                url="assets/pattern-blackgreenv3.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-            >
-                <a-image
-                    src="assets/asset.png"
-                    scale="1 1 1"
-                    class="clickable"
-                    rotation="-90 0 0"
-                    gesture-handler
-                ></a-image>
-            </a-marker>
+.q { grid-area: 1 / 1 / 2 / 2; }
+.w { grid-area: 1 / 2 / 2 / 3; }
+.e { grid-area: 1 / 3 / 2 / 4; }
+.r { grid-area: 1 / 4 / 2 / 5; }
+.t { grid-area: 1 / 5 / 2 / 6; }
+.y { grid-area: 1 / 6 / 2 / 7; }
+.u { grid-area: 1 / 7 / 2 / 8; }
+.i { grid-area: 1 / 8 / 2 / 9; }
+.o { grid-area: 1 / 9 / 2 / 10; }
+.p { grid-area: 1 / 10 / 2 / 11; }
+.a { grid-area: 2 / 1 / 3 / 2; }
+.s { grid-area: 2 / 2 / 3 / 3; }
+.d { grid-area: 2 / 3 / 3 / 4; }
+.f { grid-area: 2 / 4 / 3 / 5; }
+.g { grid-area: 2 / 5 / 3 / 6; }
+.h { grid-area: 2 / 6 / 3 / 7; }
+.j { grid-area: 2 / 7 / 3 / 8; }
+.k { grid-area: 2 / 8 / 3 / 9; }
+.l { grid-area: 2 / 9 / 3 / 10; }
+.z { grid-area: 3 / 1 / 4 / 2; }
+.x { grid-area: 3 / 2 / 4 / 3; }
+.c { grid-area: 3 / 3 / 4 / 4; }
+.v { grid-area: 3 / 4 / 4 / 5; }
+.b { grid-area: 3 / 5 / 4 / 6; }
+.n { grid-area: 3 / 6 / 4 / 7; }
+.m { grid-area: 3 / 7 / 4 / 8; }
+.clear { grid-area: 3 / 9 / 4 / 10; }
+.enter { grid-area: 3 / 10 / 4 / 11; }
 
-            <a-entity camera></a-entity>
-        </a-scene>
-    </body>
+.key {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      background-color: #ddd;
+      border: 1px solid #aaa;
+      color: black;
+      font-size: larger;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #cdd980;
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+      }
+      20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+      }
+    }
+
+    .shake-input {
+      animation: shake 1s ease-in-out;
+    }
+
+    .pw-input {
+        position: absolute; 
+        top: 45%; 
+        left: 25%; 
+        width: 50%; 
+        height: 80px; 
+        font-size: xx-large; 
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <div class="">
+        <input id="pwinput" class="pw-input" disabled>
+        <img src="./assets/lock-screen.jpg" width="100%" height="934px">
+    </div>
+    <div class="keyboard">
+        <div class="q key">Q</div>
+        <div class="w key">W</div>
+        <div class="e key">E</div>
+        <div class="r key">R</div>
+        <div class="t key">T</div>
+        <div class="y key">Y</div>
+        <div class="u key">U</div>
+        <div class="i key">I</div>
+        <div class="o key">O</div>
+        <div class="p key">P</div>
+        <div class="a key">A</div>
+        <div class="s key">S</div>
+        <div class="d key">D</div>
+        <div class="f key">F</div>
+        <div class="g key">G</div>
+        <div class="h key">H</div>
+        <div class="j key">J</div>
+        <div class="k key">K</div>
+        <div class="l key">L</div>
+        <div class="z key">Z</div>
+        <div class="x key">X</div>
+        <div class="c key">C</div>
+        <div class="v key">V</div>
+        <div class="b key">B</div>
+        <div class="n key">N</div>
+        <div class="m key">M</div>
+        <div class="clear key">CLEAR</div>
+        <div class="enter key">ENTER</div>
+        </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.key').click(function() {
+      $('#pwinput').removeClass('shake-input')
+      var keyText = $(this).text();
+      if (keyText == 'CLEAR') {
+        $('#pwinput').val('');
+        return;
+      }
+      if (keyText == 'ENTER') {
+        var val = $('#pwinput').val();
+        if (val != 'MAINFRAME') {
+            $('#pwinput').addClass('shake-input');
+            $('#pwinput').val('');
+            return
+        }
+        location.replace('ar.html')
+        return;
+      }
+      $('#pwinput').val($('#pwinput').val() + keyText);
+    });
+  });
+</script>
+
+</body>
 </html>
